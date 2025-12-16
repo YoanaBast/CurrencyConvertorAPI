@@ -1,19 +1,39 @@
-This is a private FastAPI-based Currency Conversion API that fetches daily exchange rates from the European Central Bank (ECB) and stores them in a PostgreSQL database (hosted on Supabase). It allows conversion between currencies using the latest available rates.
+# Currency Conversion API
 
-🔹 How it works
-Fetches daily ECB exchange rates (EUR base).
+## Description
+A **private FastAPI-based Currency Conversion API** that:  
+- Fetches daily exchange rates from the **European Central Bank (ECB)**  
+- Stores them in a **PostgreSQL database** (hosted on Supabase)  
+- Allows conversion between currencies using the latest rates  
 
-Stores or updates the rates in the Supabase/PostgreSQL database.
+---
 
-Exposes FastAPI endpoints:
+## How it Works
+1. Fetches **daily ECB exchange rates** (EUR base)  
+2. Stores or updates the rates in the database  
+3. Provides FastAPI endpoints:
 
-Endpoint	Description
-GET /rates	Fetches the latest rates and saves them to the database.
-GET /convert?amount=<amount>&from_currency=<from>&to_currency=<to>	Converts an amount between two currencies using stored rates.
+| Endpoint | Description |
+|----------|-------------|
+| `GET /rates` | Fetches latest rates and saves to the database |
+| `GET /convert?amount=<amount>&from_currency=<from>&to_currency=<to>` | Converts an amount between two currencies |
 
-🔹 Access
-The API is currently only exposed locally (127.0.0.1) for private use.
+---
 
-Others can use this API by cloning the repository and setting up their own .env file with database credentials.
+## Access
+- Currently exposed **only locally** (`127.0.0.1`)  
+- To use it elsewhere, **clone the repo** and set up your own `.env` with database credentials  
+- `.env` is **excluded** to protect sensitive info  
 
-The .env file is excluded from the repository to protect private database access.
+---
+
+## Example Usage
+
+```python
+import requests
+
+response = requests.get(
+    "http://127.0.0.1:8000/convert",
+    params={"amount": 100, "from_currency": "USD", "to_currency": "EUR"}
+)
+print(response.json())
